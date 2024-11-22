@@ -1,0 +1,23 @@
+--To update code from a specific branch:
+
+git pull origin branch-name
+
+
+--To push code:
+
+ 1. Check Your Current Branch  
+    git branch   
+
+2. Switch to the Correct Branch
+    git checkout -b branch-name
+
+3. After editing, stage the changes for commit
+    git add .
+
+4. Write a meaningful commit message
+    git commit -m "Changes in something"
+
+5. Push the Changes
+    git push origin branch-name
+
+
