@@ -1,10 +1,12 @@
 import SignUpPage from "./pages/SignUpPage"
 import HomePage from "./pages/home/HomePage"
 import LoginPage from "./pages/LoginPage"
-import {Route, Routes} from 'react-router-dom'
+import { Route, Routes} from 'react-router-dom'
 import { Toaster } from "react-hot-toast"
 import Footer from "./components/Footer"
 import { useEffect } from "react"
+import SearchPage from "./pages/SearchPage";
+import SearchHistoryPage from "./pages/SearchHistoryPage";
 import { useAuthStore } from "./store/authUser"
 import { Loader } from "lucide-react";
 
@@ -47,6 +49,9 @@ if(isCheckingAuth) {
     <Route path='/login' element={!user ?<LoginPage/>:<Navigate to='/'/>} />
     {/* visit to sign up page if user not authenticated take them to sign up else to the home ooage */}
     <Route path='/signup' element={!user ?<SignUpPage/>:<Navigate to='/'/>} /> 
+
+    <Route path='/search' element={user ? <SearchPage /> : <Navigate to={"/login"} />} />
+				<Route path='/history' element={user ? <SearchHistoryPage /> : <Navigate to={"/login"} />} />
   </Routes>
   {/* to make toaster work */}
   <Toaster/>

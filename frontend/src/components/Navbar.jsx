@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import {useAuthStore} from "../store/authUser"
 import {Menu,LogOut} from 'lucide-react'
+import { useContentStore } from "../store/content";
 // import { useContentStore } from '../store/content'
 
 
@@ -14,7 +15,7 @@ const toggleMobileMenu=()=>{
     setisMobileMenuOpen(!isMobileMenuOpen)
 }
 
-// const {setContentType}=useContentStore();
+const {setContentType}=useContentStore();
 // console.log("Content tpe",contentType)
 
   return (
@@ -46,7 +47,7 @@ const toggleMobileMenu=()=>{
 
 
 <div  className='flex gap-2 items-center z-50'>
-    <Link to={"/history"}><Search className='size-6 cursor-pointer'/> </Link>
+    <Link to={"/search"}><Search className='size-6 cursor-pointer'/> </Link>
     <img src={user.image} alt="Avatar" className='h-8 rounded cursor-pointer'/>
     <LogOut className='size-6 cursor-pointer text-white'onClick={logout}/>
 
@@ -60,6 +61,8 @@ const toggleMobileMenu=()=>{
 
 
 </div>
+
+
 
 
    {/* Mobile navbar items */}
