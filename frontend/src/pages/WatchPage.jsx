@@ -51,6 +51,11 @@ const WatchPage = () => {
         getContentDetails();
     }, [contentType, id]);
 
+    // Scroll to top whenever the movie/TV show ID changes
+useEffect(() => {
+    window.scrollTo(0, 0);
+}, [id]);
+
     const handleNext = () => {
         if (currentTrailerIdx < trailers.length - 1) setCurrentTrailerIdx(currentTrailerIdx + 1);
     };
