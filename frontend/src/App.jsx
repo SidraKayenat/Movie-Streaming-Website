@@ -1,6 +1,7 @@
 import SignUpPage from "./pages/SignUpPage"
 import HomePage from "./pages/home/HomePage"
 import LoginPage from "./pages/LoginPage"
+import MoreInfoPage from "./pages/MoreInfoPage"
 
 
 import WatchPage from "./pages/WatchPage"
@@ -59,6 +60,7 @@ if(isCheckingAuth) {
 				<Route path='/history' element={user ? <SearchHistoryPage /> : <Navigate to={"/login"} />} />
 
     <Route path='/watch/:id' element={user ?<WatchPage/>:<Navigate to='/login'/>} /> 
+    <Route path="/:type/:id" element={<MoreInfoPage />} />
 
   </Routes>
   {/* to make toaster work */}
