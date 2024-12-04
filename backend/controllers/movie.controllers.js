@@ -18,17 +18,24 @@ export async function getMovieTrailers(req, res) {
     const { id } = req.params;
     try {
         const data = await fetchFromTMDB(`https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`);
-        res.json({ success: true, trailers: data.results })
 
+        // Filter for official trailers
+        const officialTrailers = data.results.filter(
+            (video) => video.type === "Trailer" && video.official === true
+        );
+
+        // Fallback to any trailers if no official ones are found
+        const fallbackTrailers = data.results.filter((video) => video.type === "Trailer");
+
+        // Merge official trailers (prioritized first) and fallback trailers
+        const trailers = [...officialTrailers, ...fallbackTrailers.filter((video) => !officialTrailers.includes(video))];
+
+        res.json({ success: true, trailers: trailers }); // Return prioritized trailers
     } catch (error) {
-        if (error.msg.include("404")) {
-            return res.status(404).send(null)
-        }
-
-        res.status(500).json({ success: false, message: "Internal Server Error" })
+        console.error("Error fetching movie trailers:", error.message);
+        res.status(500).json({ success: false, message: "Internal Server Error" });
     }
 }
-
 
 
 

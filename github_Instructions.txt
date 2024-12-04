@@ -1,23 +1,31 @@
---To update code from a specific branch:
+//My git hub commands
 
-git pull origin branch-name
+1-Cloning 
+git clone pastetheURL
 
+2-check your username and email with whic you are gonna push the code
+git config --global user.name
+git config --global user.email
 
---To push code:
+3-If not set, do following:
+git config --global user.name "Radia Riaz"
+git config --global user.email "radia_riaz@outlook.com"
 
- 1. Check Your Current Branch  
-    git branch   
+4-If you are not inside the git repository like jo ~/Desktop/Mywork etc ke agay agar repository name i.e Movie-Streaming-Website nahi araha
+meeans you are not in the repo so to beinn the repo do 
+cd Movie-Streaming-Website
 
-2. Switch to the Correct Branch
-    git checkout -b branch-name
+5-create your own branch 
+git checkout -b branchnameadd 
 
-3. After editing, stage the changes for commit
-    git add .
+6-check branch
+git branch 
 
-4. Write a meaningful commit message
-    git commit -m "Changes in something"
+7-if any changes made save by ctrl +S , and then in the file you will see a M sign appears that says modified and to add these changes in the branch
+git add .
 
-5. Push the Changes
-    git push origin branch-name
+8- Commit a message 
+git commit -m "Changes made successfully"
 
-
+9-Push the changes (origin hi rahega )
+git push origin bramchname
