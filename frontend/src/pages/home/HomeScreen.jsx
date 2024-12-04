@@ -43,14 +43,23 @@ const HomeScreen = () => {
 
         
 
-<div className='max-w-2xl '>
-    {/* one for t=movie i.e title and one for tv i.e name */}
-<h1 className='mt-4 text-6xl  font-extrabold text-balance'>{trendingContent?.title || trendingContent?.name}</h1>
-{/* we take 2024-07-1 split by - and take the forst one only as poori date is stored */}
-<p className='mt-2 text-lg'>{trendingContent?.release_date.split("-")[0] || trendingContent?.first_air_date.split("-")[0]}{""} | {trendingContent?.adult ? "18+" : "PG-13"}</p>
-<p className='mt-4 text-lg'>{trendingContent
-.overview.length > 200 ? `${trendingContent.overview.slice(0, 200)}...` : trendingContent.overview}</p>
+        <div className='max-w-2xl'>
+    {/* One for movie (title) and one for TV (name) */}
+    <h1 className='mt-4 text-6xl font-extrabold text-balance'>
+        {trendingContent?.title || trendingContent?.name || "Unknown Title"}
+    </h1>
+    {/* Handle missing release_date or first_air_date */}
+    <p className='mt-2 text-lg'>
+        {trendingContent?.release_date?.split("-")[0] || trendingContent?.first_air_date?.split("-")[0] || "Unknown"}{" "}
+        | {trendingContent?.adult ? "18+" : "PG-13"}
+    </p>
+    <p className='mt-4 text-lg'>
+        {trendingContent?.overview?.length > 200
+            ? `${trendingContent.overview.slice(0, 200)}...`
+            : trendingContent?.overview || "No overview available."}
+    </p>
 </div>
+
 
 <div className='flex mt-8'>
 <Link to={`/moreinfo`} className='bg-white hover:bg-white/80 text-black font-bold py-2 px-4 rounded mr-4 flex items-center'>

@@ -118,22 +118,27 @@ try {
 
 
 export async function removeItemFromSearchHistory(req, res) {
-    const {id}=req.params; //its a striing stored but we want int as its in database so that we can delete 
-    id=parseInt(id);
     try {
+        const id = parseInt(req.params.id); // Parse the ID as an integer
+
+        // Ensure the ID is a valid number
+        if (isNaN(id)) {
+            return res.status(400).json({ success: false, message: "Invalid ID format" });
+        }
+
+        // Use $pull to remove the item with the matching ID
         await User.findByIdAndUpdate(req.user._id, {
             $pull: {
-                searchHistory: {
-                    id: id,
-                }
-            }
-        }
-        )
-        res.status(200).json({ success: true, message: "Item removed from search history" })
+                searchHistory: { id }, // Match the exact structure of your searchHistory items
+            },
+        });
+
+        res.status(200).json({ success: true, message: "Item removed from search history" });
     } catch (error) {
-        console.log("Error in removeItemFromSearchHistory controller : " + error.message)
+        console.error("Error in removeItemFromSearchHistory controller:", error.message);
         res.status(500).json({ success: false, message: "Internal server error" });
     }
-    }
+}
+
     
 

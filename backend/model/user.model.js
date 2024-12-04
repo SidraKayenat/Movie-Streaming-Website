@@ -1,32 +1,34 @@
 import mongoose from 'mongoose';
 
-const userSchema=mongoose.Schema({
-    username:{
-        type:String,
-        required:true,
-        unique:true,
+const userSchema = mongoose.Schema({
+    username: {
+        type: String,
+        required: true,
+        unique: true,
     },
-    email:{
-        type:String,
-        required:true,
-        unique:true,
+    email: {
+        type: String,
+        required: true,
+        unique: true,
     },
-    password:{
-        type:String,
-        required:true,
-       
+    password: {
+        type: String,
+        required: true,
     },
-    image:{
-        type:String,
-        default:"",
+    image: {
+        type: String,
+        default: "",
     },
-    SearchHistory:{
-type:Array,
-default:[]
-    }
-})
+    searchHistory: {
+        type: Array,
+        default: [],
+    },
+    subscriptionPlan: {
+        type: String,
+        enum: ['Basic', 'Premium'], // Enforces only 'Basic' or 'Premium' as valid values
+        default: 'Basic', // Default plan is 'Basic'
+    },
+});
 
-//means that the name of the model shall be 'User' based on the UserSchema
-//the agay wala User shall be singular and capitalized because by default in database it is converted to users 
-export const User=mongoose.model('User', userSchema)
-
+// Create and export the User model based on the schema
+export const User = mongoose.model('User', userSchema);

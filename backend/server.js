@@ -4,11 +4,12 @@ import movieRoutes from "./routes/movie.route.js"
 import tvRoutes from "./routes/tv.route.js"
 import searchRoutes from "./routes/search.route.js"
 import moreinfoRoutes from './routes/moreinfo.route.js'; // adjust the path based on your file structure
-
+import paymentRoutes from './routes/payment.route.js'; 
 import { ENV_VARS } from "./config/envVars.js"
 import { connectDB } from './config/db.js';
 import cookieParser from 'cookie-parser'
 import {protectRoute} from './middleware/protectRoute.js'
+// import { createPaymentIntent } from './controllers/payment.controller.js'
 const app=express();
 app.use(express.json()); //must be used above rotues deifnition
 app.use(cookieParser()) //necessary for protectRoute
@@ -28,7 +29,8 @@ app.use("/api/v1/tv",protectRoute,tvRoutes);  //this protectRoute is a middlewar
 //Benefit :- All authentication-related routes are logically grouped under /api/v1/auth, rather than cluttering server.js with multiple routes.
 app.use("/api/v1/search",protectRoute,searchRoutes); 
 app.use("/api/v1/moreinfo",protectRoute,moreinfoRoutes); 
-
+app.use('/api/v1/payment', paymentRoutes);
+// app.post('/create-payment-intent', createPaymentIntent);
  //allows us to use req.body in our app.post and get etc 
 app.listen(port, ()=>{
     console.log("Server started at http://localhost:"+port)
