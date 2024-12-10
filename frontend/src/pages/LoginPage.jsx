@@ -11,7 +11,7 @@ const LoginPage = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    login({ email, password });
+    login({ email, password }, t);
   };
   return (
     <div className="h-screen w-full hero-bg">

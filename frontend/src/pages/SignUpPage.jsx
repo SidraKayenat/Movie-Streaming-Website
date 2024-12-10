@@ -17,7 +17,7 @@ const SignUpPage = () => {
 
   const handleSignUp = (e) => {
     e.preventDefault();
-    signup({ email, password, username });
+    signup({ email, password, username }, t);
   };
   return (
     <div className="h-screen w-full hero-bg">

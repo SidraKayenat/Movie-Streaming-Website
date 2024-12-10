@@ -45,5 +45,9 @@
   "Search for a": "Search for a",
   "movie": "movie",
   "tv": "tv",
-  "person": "person"
+  "person": "person",
+  "Logged in successfully": "Logged in successfully",
+  "Login failed": "Login failed",
+  "Account Created successfully": "Account Created successfully",
+  "Signup failed": "Signup failed"
 }

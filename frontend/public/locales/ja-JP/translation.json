@@ -45,5 +45,9 @@
   "Search for a": "を検索してください",
   "movie": "映画",
   "tv": "テレビ",
-  "person": "人"
+  "person": "人",
+  "Logged in successfully": "正常にログインしました",
+  "Login failed": "ログインに失敗しました",
+  "Account Created successfully": "「アカウントが正常に作成されました」",
+  "Signup failed": "「サインアップに失敗しました」"
 }

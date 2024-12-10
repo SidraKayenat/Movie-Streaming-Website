@@ -45,5 +45,9 @@
   "Search for a": "Buscar un",
   "movie": "película",
   "tv": "serie",
-  "person": "persona"
+  "person": "persona",
+  "Logged in successfully": "Inicio de sesión exitoso",
+  "Login failed": "Error en el inicio de sesión",
+  "Account Created successfully": "Cuenta creada con éxito",
+  "Signup failed": "Error en el registro"
 }
