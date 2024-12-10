@@ -1,7 +1,7 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useAuthStore } from "../store/authUser";
+import { useTranslation } from "react-i18next";
 
 const SignUpPage = () => {
   const { searchParams } = new URL(document.location);
@@ -9,6 +9,7 @@ const SignUpPage = () => {
   const [email, setEmail] = useState(emailValue || "");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const { t } = useTranslation();
 
   //when we addd the email in auth screen it took us to sign up page and in url cam eemail form the url we got the email
 
@@ -27,20 +28,20 @@ const SignUpPage = () => {
       </header>
 
       {/* //hold the mail username etc  */}
-      <div className="flex justify-center items-center mt-20 mx-3">
+      <div className="flex justify-center items-center mt-5 mx-3">
         <div className="w-full max-w-md p-8 space-y-6 bg-black/60 rounded-lg shadow-md">
           <h1 className="text-center text-white text-2xl font-bold mb-4">
-            SignUp{" "}
+            {t("SignUp")}
           </h1>
 
-          <form className="space-y-4" onSubmit={handleSignUp}>
+          <form className="space-y-2" onSubmit={handleSignUp}>
             {/* for email */}
             <div>
               <label
                 htmlFor="email"
                 className="text-gray-300 block text-sm font-medium"
               >
-                Email
+                {t("Email")}
               </label>
               <input
                 type="email"
@@ -58,7 +59,7 @@ const SignUpPage = () => {
                 htmlFor="username"
                 className="text-gray-300 block text-sm font-medium"
               >
-                Username
+                {t("Username")}
               </label>
               <input
                 type="username"
@@ -76,7 +77,7 @@ const SignUpPage = () => {
                 htmlFor="password"
                 className="text-gray-300 block text-sm font-medium"
               >
-                Password
+                {t("Password")}
               </label>
               <input
                 type="password"
@@ -89,14 +90,14 @@ const SignUpPage = () => {
             </div>
 
             <button className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring">
-              SignUp
+              {t("SignUp")}
             </button>
           </form>
 
           <div className="text-center text-gray-400">
-            Already a member?{" "}
+            <span className="mr-2">{t("Already a member?")}</span>
             <Link to={"/login"} className="text-red-500 hover:underline">
-              Sign In
+              {t("Sign In")}
             </Link>
           </div>
         </div>

@@ -1,13 +1,13 @@
-import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuthStore } from "../store/authUser";
+import { useTranslation } from "react-i18next";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
-
   const [password, setPassword] = useState("");
   const { login } = useAuthStore();
+  const { t } = useTranslation();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -25,7 +25,7 @@ const LoginPage = () => {
       <div className="flex justify-center items-center mt-20 mx-3">
         <div className="w-full max-w-md p-8 space-y-6 bg-black/60 rounded-lg shadow-md">
           <h1 className="text-center text-white text-2xl font-bold mb-4">
-            LogIn{" "}
+            {t("LogIn")}
           </h1>
 
           <form className="space-y-4" onSubmit={handleLogin}>
@@ -35,7 +35,7 @@ const LoginPage = () => {
                 htmlFor="email"
                 className="text-gray-300 block text-sm font-medium"
               >
-                Email
+                {t("Email")}
               </label>
               <input
                 type="email"
@@ -53,7 +53,7 @@ const LoginPage = () => {
                 htmlFor="password"
                 className="text-gray-300 block text-sm font-medium"
               >
-                Password
+                {t("Password")}
               </label>
               <input
                 type="password"
@@ -66,14 +66,14 @@ const LoginPage = () => {
             </div>
 
             <button className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring">
-              LogIn
+              {t("LogIn")}
             </button>
           </form>
 
           <div className="text-center text-gray-400">
-            Dont have an account?{" "}
+            <span className="mr-2">{t("Dont have an account?")}</span>
             <Link to={"/signup"} className="text-red-500 hover:underline">
-              Sign Up
+              {t("SignUp")}
             </Link>
           </div>
         </div>
