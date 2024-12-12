@@ -126,7 +126,7 @@ export async function getSearchHistory(req, res) {
 }
 
 export async function removeItemFromSearchHistory(req, res) {
-  const { id } = req.params; //its a striing stored but we want int as its in database so that we can delete
+  let { id } = req.params;; //its a striing stored but we want int as its in database so that we can delete
   id = parseInt(id);
   try {
     await User.findByIdAndUpdate(req.user._id, {

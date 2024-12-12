@@ -29,3 +29,7 @@ git commit -m "Changes made successfully"
 
 9-Push the changes (origin hi rahega )
 git push origin bramchname
+
+
+//cloning a single branch
+git clone --branch main --single-branch https://github.com/SidraKayenat/Movie-Streaming-Website.git

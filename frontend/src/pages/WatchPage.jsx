@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useContentStore } from "../store/content";
+import { useAuthStore } from "../store/authUser";
 import axios from "axios";
 import Navbar from "../components/Navbar";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import ReactPlayer from "react-player";
-import { ORIGINAL_IMG_BASE_URL } from "../utils/constants";
+// import { ORIGINAL_IMG_BASE_URL } from "../utils/constants";
+import { ORIGINAL_IMG_BASE_URL, SMALL_IMG_BASE_URL } from "../utils/constants";
 import { formatReleaseDate } from "../utils/dateFunction";
 import WatchPageSkeleton from "../components/skeletons/WatchPageSkeleton";
 import { useTranslation } from "react-i18next";
@@ -19,9 +21,29 @@ const WatchPage = () => {
   const [content, setContent] = useState({});
   // const [similarContent, setSimilarContent] = useState([]);
   const { contentType } = useContentStore();
+  const { subscriptionPlan } = useAuthStore();
+
+  const [showAd, setShowAd] = useState(false); // Track if ad should be shown
+  const [loadingVideo, setLoadingVideo] = useState(true); // Track if the video is loading
+  const [adUrl, setAdUrl] = useState("");
   const { t } = useTranslation();
   const language = i18n.language;
+  const adVideos = [
+    "https://www.youtube.com/watch?v=IoO5O-VhZAQ", // Ad 1
+    "https://www.youtube.com/watch?v=JbKVuQoe8BM", // Ad 2
+    "https://www.youtube.com/watch?v=2zLnqlCu_4g",
+    "https://www.youtube.com/watch?v=5UCVLFNQYys",
+ 
+    "https://www.youtube.com/watch?v=PD9kAsziXJw",//new,
+    "https://www.youtube.com/watch?v=Xw6cNwjEthg", //ufone 1
+    "https://www.youtube.com/watch?v=XnoUVviFOWw",//bata ad
+    "https://www.youtube.com/watch?v=VeFgKwdvjUE"
+];
 
+const getRandomAd = () => {
+    const randomIndex = Math.floor(Math.random() * adVideos.length);
+    return adVideos[randomIndex];
+};
   useEffect(() => {
     const getTrailers = async () => {
       try {
@@ -66,6 +88,27 @@ const WatchPage = () => {
     if (currentTrailerIdx > 0) setCurrentTrailerIdx(currentTrailerIdx - 1);
   };
 
+  const handleAdEnd = () => {
+    setShowAd(false); // Hide the ad once it ends
+    setLoadingVideo(false); // Allow trailer to load
+};
+
+useEffect(() => {
+    if (subscriptionPlan === "Basic") {
+        // Show ad and slow down video loading
+        setAdUrl(getRandomAd()); // Get and set a random ad URL
+        setShowAd(true);
+        setLoadingVideo(true);
+        setTimeout(() => {
+            setLoadingVideo(false); // Simulate slow loading after a delay (for basic plan)
+        }, 5000); // 5 seconds delay before showing the trailer
+    } else {
+        // Premium plan - no ad, faster loading
+        setShowAd(false);
+        setLoadingVideo(false);
+    }
+}, [subscriptionPlan]);
+
   if (loading) {
     return (
       <div className="min-h-screen bg-black p-10">
@@ -94,10 +137,26 @@ const WatchPage = () => {
       <div className="mx-auto container px-4 py-8 h-full">
         <Navbar />
 
+        {showAd && (
+                    <div className="ad-container text-center mb-8">
+                        {/* <h2 className="text-xl text-white mb-4"></h2> */}
+                        <ReactPlayer
+                            controls={false} // Disable controls to prevent fast-forwarding
+                            width="100%"
+                            height="70vh"
+                            className="mx-auto rounded-lg"
+                            url={adUrl} // Use the current ad URL
+                            onEnded={handleAdEnd} // Hide ad and show video after ad ends
+                            playing={true} // Ensure video plays automatically
+                        />
+                    </div>
+                )}
+
+
         {/* Show Trailers */}
-        {trailers.length > 0 && (
+        {!showAd && trailers.length > 0 && (
           <>
-            <div className="flex justify-between items-center mb-4">
+            {/* <div className="flex justify-between items-center mb-4">
               <button
                 className={`bg-gray-500/70 hover:bg-gray-500 text-white py-2 px-4 rounded ${
                   currentTrailerIdx === 0 ? "opacity-50 cursor-not-allowed" : ""
@@ -119,7 +178,7 @@ const WatchPage = () => {
               >
                 <ChevronRight size={24} />
               </button>
-            </div>
+            </div> */}
 
             <div className="aspect-video mb-8 p-2 sm:px-10 md:px-32">
               <ReactPlayer
@@ -134,7 +193,7 @@ const WatchPage = () => {
         )}
 
         {/* Show if No Trailers */}
-        {trailers.length === 0 && (
+        {trailers.length === 0 &&!showAd && (
           <h2 className="text-xl text-center mt-5">
             {t("No official trailers available for")}
             <span className="font-bold text-red-600 mx-2">
@@ -175,3 +234,8 @@ const WatchPage = () => {
 };
 
 export default WatchPage;
+
+
+
+
+

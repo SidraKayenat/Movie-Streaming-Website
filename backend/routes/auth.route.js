@@ -1,5 +1,5 @@
 import express from 'express'
-import {signup,login,logout,authCheck} from '../controllers/auth.controllers.js'  //must add .js bcz used type=module
+import {signup,login,logout,authCheck,deleteAccount} from '../controllers/auth.controllers.js'  //must add .js bcz used type=module
 import { protectRoute } from '../middleware/protectRoute.js'; 
 
 // Using router allows you to define routes in a separate file (like auth.route.js) rather than having all routes
@@ -16,7 +16,7 @@ router.post("/logout",logout)
 //extra added 
 router.get("/authCheck",protectRoute,authCheck)
 
-
+router.delete("/delete", protectRoute, deleteAccount);
 
 
 

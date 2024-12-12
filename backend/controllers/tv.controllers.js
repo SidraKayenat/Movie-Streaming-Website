@@ -14,6 +14,23 @@ export async function getTrendingtv(req, res) {
   }
 }
 
+// export async function gettvTrailers(req, res) {
+//   const { id } = req.params;
+//   const language = req.query.language || "en-US";
+//   try {
+//     const data = await fetchFromTMDB(
+//       `https://api.themoviedb.org/3/tv/${id}/videos?language=${language}`
+//     );
+//     res.json({ success: true, trailers: data.results });
+//   } catch (error) {
+//     if (error.msg.include("404")) {
+//       return res.status(404).send(null);
+//     }
+
+//     res.status(500).json({ success: false, message: "Internal Server Error" });
+//   }
+// }
+
 export async function gettvTrailers(req, res) {
   const { id } = req.params;
   const language = req.query.language || "en-US";
@@ -23,13 +40,15 @@ export async function gettvTrailers(req, res) {
     );
     res.json({ success: true, trailers: data.results });
   } catch (error) {
-    if (error.msg.include("404")) {
+    if (error && error.msg && error.msg.includes("404")) {
       return res.status(404).send(null);
     }
 
+    console.error(error); // log full error for debugging
     res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 }
+
 
 export async function gettvDetails(req, res) {
   const language = req.query.language || "en-US";
