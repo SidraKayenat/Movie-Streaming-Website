@@ -34,17 +34,17 @@ const WatchPage = () => {
     "https://www.youtube.com/watch?v=JbKVuQoe8BM", // Ad 2
     "https://www.youtube.com/watch?v=2zLnqlCu_4g",
     "https://www.youtube.com/watch?v=5UCVLFNQYys",
- 
-    "https://www.youtube.com/watch?v=PD9kAsziXJw",//new,
-    "https://www.youtube.com/watch?v=Xw6cNwjEthg", //ufone 1
-    "https://www.youtube.com/watch?v=XnoUVviFOWw",//bata ad
-    "https://www.youtube.com/watch?v=VeFgKwdvjUE"
-];
 
-const getRandomAd = () => {
+    "https://www.youtube.com/watch?v=PD9kAsziXJw", //new,
+    "https://www.youtube.com/watch?v=Xw6cNwjEthg", //ufone 1
+    "https://www.youtube.com/watch?v=XnoUVviFOWw", //bata ad
+    "https://www.youtube.com/watch?v=VeFgKwdvjUE",
+  ];
+
+  const getRandomAd = () => {
     const randomIndex = Math.floor(Math.random() * adVideos.length);
     return adVideos[randomIndex];
-};
+  };
   useEffect(() => {
     const getTrailers = async () => {
       try {
@@ -82,7 +82,7 @@ const getRandomAd = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-}, [id]);
+  }, [id]);
 
   const handleNext = () => {
     if (currentTrailerIdx < trailers.length - 1)
@@ -96,29 +96,27 @@ const getRandomAd = () => {
   const handleAdEnd = () => {
     setShowAd(false); // Hide the ad once it ends
     setLoadingVideo(false); // Allow trailer to load
-};
+  };
 
-const scrollToMovieScreen = () => {
-  movieScreenRef.current?.scrollIntoView({ behavior: "smooth" });
-};
+  const scrollToMovieScreen = () => {
+    movieScreenRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
-useEffect(() => {
+  useEffect(() => {
     if (subscriptionPlan === "Basic") {
-        // Show ad and slow down video loading
-        setAdUrl(getRandomAd()); // Get and set a random ad URL
-        setShowAd(true);
-        setLoadingVideo(true);
-        setTimeout(() => {
-            setLoadingVideo(false); // Simulate slow loading after a delay (for basic plan)
-        }, 5000); // 5 seconds delay before showing the trailer
+      // Show ad and slow down video loading
+      setAdUrl(getRandomAd()); // Get and set a random ad URL
+      setShowAd(true);
+      setLoadingVideo(true);
+      setTimeout(() => {
+        setLoadingVideo(false); // Simulate slow loading after a delay (for basic plan)
+      }, 5000); // 5 seconds delay before showing the trailer
     } else {
-        // Premium plan - no ad, faster loading
-        setShowAd(false);
-        setLoadingVideo(false);
+      // Premium plan - no ad, faster loading
+      setShowAd(false);
+      setLoadingVideo(false);
     }
-}, [subscriptionPlan]);
-
-
+  }, [subscriptionPlan]);
 
   if (loading) {
     return (
@@ -144,25 +142,25 @@ useEffect(() => {
   }
 
   return (
-    <div className="bg-black min-h-screen text-white">
-      <div className="mx-auto container px-4 py-8 h-full">
+    // <div className="bg-black min-h-screen text-white">
+    <div className=" bg-black relative  h-screen text-white">
+      <div className="mx-auto container px-4 h-full">
         <Navbar />
 
         {showAd && (
-                    <div className="ad-container text-center mb-8">
-                        {/* <h2 className="text-xl text-white mb-4"></h2> */}
-                        <ReactPlayer
-                            controls={false} // Disable controls to prevent fast-forwarding
-                            width="100%"
-                            height="70vh"
-                            className="mx-auto rounded-lg"
-                            url={adUrl} // Use the current ad URL
-                            onEnded={handleAdEnd} // Hide ad and show video after ad ends
-                            playing={true} // Ensure video plays automatically
-                        />
-                    </div>
-                )}
-
+          <div className="ad-container text-center mb-8">
+            {/* <h2 className="text-xl text-white mb-4"></h2> */}
+            <ReactPlayer
+              controls={false} // Disable controls to prevent fast-forwarding
+              width="100%"
+              height="70vh"
+              className="mx-auto rounded-lg"
+              url={adUrl} // Use the current ad URL
+              onEnded={handleAdEnd} // Hide ad and show video after ad ends
+              playing={true} // Ensure video plays automatically
+            />
+          </div>
+        )}
 
         {/* Show Trailers */}
         {!showAd && trailers.length > 0 && (
@@ -202,19 +200,19 @@ useEffect(() => {
             </div>
 
             {/* Watch Now Button */}
-<div className="text-center mb-8">
-                            <button
-                                className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-lg shadow-lg"
-                                onClick={scrollToMovieScreen}
-                            >
-                                Watch Now
-                            </button>
-                        </div>
+            <div className="text-center mb-8">
+              <button
+                className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-lg shadow-lg"
+                onClick={scrollToMovieScreen}
+              >
+                Watch Now
+              </button>
+            </div>
           </>
         )}
 
         {/* Show if No Trailers */}
-        {trailers.length === 0 &&!showAd && (
+        {trailers.length === 0 && !showAd && (
           <h2 className="text-xl text-center mt-5">
             {t("No official trailers available for")}
             <span className="font-bold text-red-600 mx-2">
@@ -249,24 +247,21 @@ useEffect(() => {
             className="max-h-[600px] rounded-md"
           />
         </div>
-           {/* Movie Screen */}
-           <div
-                    ref={movieScreenRef}
-                    className="bg-gray-800 rounded-lg shadow-md p-6 mt-10 max-w-6xl mx-auto"
-                >
-                    <h2 className="text-2xl font-bold text-center mb-6">Enjoy Your Movie!</h2>
-                    <div className="aspect-video bg-black rounded-lg border-4 border-gray-700 flex items-center justify-center">
-                        <p className="text-gray-400 text-lg">Your movie will play here.</p>
-                    </div>
-                </div>
+        {/* Movie Screen */}
+        <div
+          ref={movieScreenRef}
+          className="bg-gray-800 rounded-lg shadow-md p-6 mt-10 max-w-6xl mx-auto"
+        >
+          <h2 className="text-2xl font-bold text-center mb-6">
+            Enjoy Your Movie!
+          </h2>
+          <div className="aspect-video bg-black rounded-lg border-4 border-gray-700 flex items-center justify-center">
+            <p className="text-gray-400 text-lg">Your movie will play here.</p>
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
 export default WatchPage;
-
-
-
-
-
