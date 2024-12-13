@@ -1,6 +1,5 @@
 // coreect
 
-
 import SignUpPage from "./pages/SignUpPage";
 import HomePage from "./pages/home/HomePage";
 import LoginPage from "./pages/LoginPage";
@@ -20,7 +19,7 @@ import { useAuthStore } from "./store/authUser";
 import { Loader } from "lucide-react";
 import { Globe } from "lucide-react";
 import { Navigate } from "react-router-dom";
-import PaymentPage from "./pages/payments/PaymentPage.jsx";  // Add this import
+import PaymentPage from "./pages/payments/PaymentPage.jsx"; // Add this import
 
 function App() {
   const [locale, setLocale] = useState(i18n.language);
@@ -61,20 +60,19 @@ function App() {
             className="bg-black text-white border border-gray-500 rounded-full px-4 py-1 focus:ring-2 focus:ring-red-100 focus:outline-none  transition duration-200 ease-in-out"
           > */}
           <Globe className="text-white w-5 h-5" aria-label="Select Language" />
-        <select
-          name="English"
-          id="selectlang"
-          value={locale}
-          onChange={handleChange}
-          className="bg-black text-white border border-gray-500 rounded-full px-4 py-1 focus:ring-2 focus:ring-red-100 focus:outline-none transition duration-200 ease-in-out"
-        >
-            <option value="en-US">English</option>
-            <option value="ja-JP">Japanese</option>
-            <option value="it-IT">Italian</option>
-            <option value="es-ES">Spanish</option>
+          <select
+            name="English"
+            id="selectlang"
+            value={locale}
+            onChange={handleChange}
+            className="bg-black text-white border border-gray-500 rounded-full px-8 py-1 focus:ring-2 focus:ring-red-100 focus:outline-none transition duration-200 ease-in-out appearance-none"
+          >
+            <option value="en-US">🏴 English</option>
+            <option value="ja-JP">🗻 Japanese</option>
+            <option value="it-IT">🍕 Italian</option>
+            <option value="es-ES">🥟 Spanish</option>
           </select>
         </div>
-      
 
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -96,7 +94,7 @@ function App() {
             path="/history"
             element={user ? <SearchHistoryPage /> : <Navigate to={"/login"} />}
           />
-<Route path='/payment' element={ <PaymentPage />} />
+          <Route path="/payment" element={<PaymentPage />} />
           <Route
             path="/watch/:id"
             element={user ? <WatchPage /> : <Navigate to="/login" />}
@@ -113,6 +111,3 @@ function App() {
 }
 
 export default App;
-
-
-

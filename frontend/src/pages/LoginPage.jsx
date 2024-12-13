@@ -16,8 +16,8 @@ const LoginPage = () => {
   return (
     <div className="h-screen w-full hero-bg">
       <header className="max-w-6xl mx-auto flex items-center justify-between p-4">
-        <Link to={"/"}>
-          <img src="/netflix-logo.png" alt="logo" className="w-52" />
+        <Link to={"/"} className="mt-2">
+          <img src="/logo.png" alt="logo" className="w-52" />
         </Link>
       </header>
 
@@ -58,7 +58,7 @@ const LoginPage = () => {
               <input
                 type="password"
                 className="w-full px-3 py-2 mt-1 border border-gray-700 rounded-md bg-transparent text-white focus:outline-none focus:ring"
-                placeholder="Enter your password"
+                placeholder={t("Enter your password")}
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}

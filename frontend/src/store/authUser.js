@@ -67,11 +67,6 @@
 //   },
 // }));
 
-
-
-
-
-
 import { create } from "zustand";
 import toast from "react-hot-toast";
 import axios from "axios";
@@ -84,7 +79,7 @@ export const useAuthStore = create((set) => ({
   isLoggingOut: false,
   isLoggingIn: false,
 
-  signup: async ({ email, password, username, subscriptionPlan }) => {
+  signup: async ({ email, password, username, subscriptionPlan }, t) => {
     set({ isSigningUp: true });
     try {
       const response = await axios.post("/api/v1/auth/signup", {
@@ -93,18 +88,25 @@ export const useAuthStore = create((set) => ({
         username,
         subscriptionPlan, // Send subscription plan in the request
       });
-      set({ user: response.data.user, subscriptionPlan: response.data.user.subscriptionPlan, isSigningUp: false });
-      toast.success("Account Created successfully");
+      set({
+        user: response.data.user,
+        subscriptionPlan: response.data.user.subscriptionPlan,
+        isSigningUp: false,
+      });
+      toast.success(t("Account Created successfully"));
     } catch (error) {
-      toast.error(error.response.data.message || "Signup failed");
+      toast.error(error.response.data.message || t("Signup failed"));
       set({ isSigningUp: false, user: null, subscriptionPlan: null });
     }
   },
 
-  login: async ({ email, password }) => {
+  login: async ({ email, password }, t) => {
     set({ isLoggingIn: true });
     try {
-      const response = await axios.post("/api/v1/auth/login", { email, password });
+      const response = await axios.post("/api/v1/auth/login", {
+        email,
+        password,
+      });
 
       // Set user and subscription plan in the store after login
       set({
@@ -113,9 +115,9 @@ export const useAuthStore = create((set) => ({
         isLoggingIn: false,
       });
 
-      toast.success("Logged in successfully");
+      toast.success(t("Logged in successfully"));
     } catch (error) {
-      const errorMessage = error.response?.data?.message || "Login failed";
+      const errorMessage = error.response?.data?.message || t("Login failed");
       toast.error(errorMessage);
 
       set({ isLoggingIn: false, user: null, subscriptionPlan: null });
@@ -127,6 +129,7 @@ export const useAuthStore = create((set) => ({
     try {
       await axios.post("/api/v1/auth/logout");
       set({ user: null, subscriptionPlan: null, isLoggingOut: false });
+
       toast.success("Logged out successfully");
     } catch (error) {
       set({ isLoggingOut: false, user: null, subscriptionPlan: null });
@@ -153,8 +156,3 @@ export const useAuthStore = create((set) => ({
     set({ subscriptionPlan: newPlan });
   },
 }));
-
-
-
-
-

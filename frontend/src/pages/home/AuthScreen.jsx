@@ -21,29 +21,28 @@ const AuthScreen = () => {
       {/* Navbar */}
 
       <header className="max-w-6xl mx-auto flex items-center justify-between p-4 pb-10">
-        <img
-            src="/logo2.png"
-          alt=" logo"
-          className="w-32 sm:w-52"
-        />
-    <Link
-  to="/login"
-  className="  text-white bg-red-600 py-1 px-3 mr-[-2 rem] rounded-lg font-semibold text-lg shadow-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-600 transition duration-300 ease-in-out"
->
-  {t("Sign In")}
-</Link>
-
+        <img src="/logo.png" alt=" logo" className="w-32 sm:w-52 mt-2" />
+        <Link
+          to="/login"
+          className="  text-white bg-red-600 py-1 px-3 mr-[-2 rem] rounded-lg font-semibold text-lg shadow-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-600 transition duration-300 ease-in-out"
+        >
+          {t("Sign In")}
+        </Link>
       </header>
 
       {/* hero section */}
       <div className="flex flex-col items-center justify-center text-center py-40 text-white max-w-6xl mx-auto">
-  <h1 className="text-4xl md:text-6xl mb-4 font-bold">
-    {t("Endless entertainment at your fingertips")}
-  </h1>
-  <h1 className="text-lg mb-4">{t("Stream anytime, anywhere. No strings attached.")}</h1>
-  <h1 className="mb-4">
-    {t("Excited to begin? Enter your email to start or resume your journey")}
-  </h1>
+        <h1 className="text-4xl md:text-6xl mb-4 font-bold">
+          {t("Endless entertainment at your fingertips")}
+        </h1>
+        <h1 className="text-lg mb-4">
+          {t("Stream anytime, anywhere. No strings attached.")}
+        </h1>
+        <h1 className="mb-4">
+          {t(
+            "Excited to begin? Enter your email to start or resume your journey"
+          )}
+        </h1>
 
         <form
           className="flex flex-col md:flex-row gap-4 w-1/2"
@@ -58,9 +57,7 @@ const AuthScreen = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
 
-
-
-{/* green bg-[#1B4224]
+          {/* green bg-[#1B4224]
 purple
 bg-[#bc04fc]
 */}
@@ -125,11 +122,7 @@ bg-[#bc04fc]
               />
               {/* gif wali cheezx  */}
               <div className="flex items-center gap-2 absolute bottom-0 left-1/2 -translate-x-1/2 bg-black w-3/4 lg:w-1/2 h-24 border border-slate-500 rounded-md px-2 ">
-                <img
-                  src="/single4.jpg"
-                  alt="image"
-                  className="h-full"
-                />
+                <img src="/single4.jpg" alt="image" className="h-full" />
                 <div className="flex justify-between items-center w-full">
                   <div className="flex flex-col gap-0">
                     <span className="text-md lg:text-lg font-bold">
@@ -157,15 +150,16 @@ bg-[#bc04fc]
             </p>
           </div> */}
           {/* Right Side Section */}
-<div className="flex-1 md:text-left text-center">
-  <h2 className="text-4xl md:text-5xl font-extrabold mb-4 text-balance">
-    {t("Watch in Your Language")}
-  </h2>
-  <p className="text-lg md:text-xl">
-    {t("Enjoy your favorite shows and movies with subtitles and audio in multiple languages!")}
-  </p>
-</div>
-
+          <div className="flex-1 md:text-left text-center">
+            <h2 className="text-4xl md:text-5xl font-extrabold mb-4 text-balance">
+              {t("Watch in Your Language")}
+            </h2>
+            <p className="text-lg md:text-xl">
+              {t(
+                "Enjoy your favorite shows and movies with subtitles and audio in multiple languages!"
+              )}
+            </p>
+          </div>
         </div>
       </div>
 
@@ -234,15 +228,16 @@ bg-[#bc04fc]
             </p>
           </div> */}
           {/* Right Side Section */}
-<div className="flex-1 text-center md:text-left">
-  <h2 className="text-4xl md:text-5xl font-extrabold mb-4 ml-10 ">
-    {t("Stream Without Interruptions")}
-  </h2>
-  <p className="text-lg md:text-xl">
-    {t("Enjoy ad-free streaming and endless entertainment with your membership.")}
-  </p>
-</div>
-
+          <div className="flex-1 text-center md:text-left">
+            <h2 className="text-4xl md:text-5xl font-extrabold mb-4 ml-10 ">
+              {t("Stream Without Interruptions")}
+            </h2>
+            <p className="text-lg md:text-xl">
+              {t(
+                "Enjoy ad-free streaming and endless entertainment with your membership."
+              )}
+            </p>
+          </div>
         </div>
       </div>
     </div>
