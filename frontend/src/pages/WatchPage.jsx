@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { useContentStore } from "../store/content";
 import { useAuthStore } from "../store/authUser";
@@ -22,6 +22,7 @@ const WatchPage = () => {
   // const [similarContent, setSimilarContent] = useState([]);
   const { contentType } = useContentStore();
   const { subscriptionPlan } = useAuthStore();
+  const movieScreenRef = useRef(null); // Ref for the movie screen section
 
   const [showAd, setShowAd] = useState(false); // Track if ad should be shown
   const [loadingVideo, setLoadingVideo] = useState(true); // Track if the video is loading
@@ -79,6 +80,10 @@ const getRandomAd = () => {
     getContentDetails();
   }, [contentType, id, language]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+}, [id]);
+
   const handleNext = () => {
     if (currentTrailerIdx < trailers.length - 1)
       setCurrentTrailerIdx(currentTrailerIdx + 1);
@@ -91,6 +96,10 @@ const getRandomAd = () => {
   const handleAdEnd = () => {
     setShowAd(false); // Hide the ad once it ends
     setLoadingVideo(false); // Allow trailer to load
+};
+
+const scrollToMovieScreen = () => {
+  movieScreenRef.current?.scrollIntoView({ behavior: "smooth" });
 };
 
 useEffect(() => {
@@ -108,6 +117,8 @@ useEffect(() => {
         setLoadingVideo(false);
     }
 }, [subscriptionPlan]);
+
+
 
   if (loading) {
     return (
@@ -189,6 +200,16 @@ useEffect(() => {
                 url={`https://www.youtube.com/watch?v=${trailers[currentTrailerIdx]?.key}`}
               />
             </div>
+
+            {/* Watch Now Button */}
+<div className="text-center mb-8">
+                            <button
+                                className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-lg shadow-lg"
+                                onClick={scrollToMovieScreen}
+                            >
+                                Watch Now
+                            </button>
+                        </div>
           </>
         )}
 
@@ -228,6 +249,16 @@ useEffect(() => {
             className="max-h-[600px] rounded-md"
           />
         </div>
+           {/* Movie Screen */}
+           <div
+                    ref={movieScreenRef}
+                    className="bg-gray-800 rounded-lg shadow-md p-6 mt-10 max-w-6xl mx-auto"
+                >
+                    <h2 className="text-2xl font-bold text-center mb-6">Enjoy Your Movie!</h2>
+                    <div className="aspect-video bg-black rounded-lg border-4 border-gray-700 flex items-center justify-center">
+                        <p className="text-gray-400 text-lg">Your movie will play here.</p>
+                    </div>
+                </div>
       </div>
     </div>
   );

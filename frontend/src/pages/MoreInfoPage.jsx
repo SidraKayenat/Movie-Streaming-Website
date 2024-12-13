@@ -303,6 +303,34 @@ const MoreInfoPage = () => {
               </div>
             </div>
 
+            <div className="mb-4">
+  <strong>{t("Starring:")}</strong>
+  <div className="flex gap-4 mt-2">
+    {content.cast &&
+      content.cast.slice(0, 5).map((actor) => (
+        <div
+          key={actor.id}
+          className="actor text-center bg-gray-800 p-4 rounded-lg shadow-lg" // Add background, padding, and shadow for each actor container
+        >
+          <div
+            className="w-24 h-24  bg-gray-200 flex items-center justify-center overflow-hidden mx-auto"
+            style={{ boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)" }}
+          >
+            <img
+              src={`${ORIGINAL_IMG_BASE_URL}${actor.profile_path}`}
+              alt={actor.name}
+              className="w-20 h-20 rounded-full object-cover"
+            />
+          </div>
+          <p className="text-sm mt-2">{actor.name}</p>
+        </div>
+      ))}
+  </div>
+</div>
+
+
+
+
             {/* Reviews */}
             {content.reviews && content.reviews.length > 0 && (
               <div className="reviews mt-8">
