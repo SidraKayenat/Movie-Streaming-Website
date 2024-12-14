@@ -50,7 +50,7 @@ function App() {
   return (
     <>
       <LocaleContext.Provider value={{ locale, setLocale }}>
-        <div className="absolute z-50 right-[130px] sm:right-[210px] top-[20px] flex flex-row space-x-3 items-center bg-transparent pt-1 shadow-lg">
+        <div className="absolute z-50 left-[1000px] sm:right-[210px] top-[20px] flex flex-row space-x-3 items-center bg-transparent pt-1 shadow-lg">
           <Globe className="text-white w-5 h-5" aria-label="Select Language" />
           <select
             name="English"
