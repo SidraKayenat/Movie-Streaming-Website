@@ -30,6 +30,7 @@ const HomeScreen = () => {
       </div>
     );
   }
+
   return (
     <>
       <div className="relative h-screen text-white">
@@ -59,7 +60,7 @@ const HomeScreen = () => {
             <h1 className="mt-4 text-6xl  font-extrabold text-balance">
               {trendingContent?.title || trendingContent?.name}
             </h1>
-            {/* we take 2024-07-1 split by - and take the forst one only as poori date is stored */}
+            {/* we take 2024-07-1 split by - and take the first one only as the full date is stored */}
             <p className="mt-2 text-lg">
               {trendingContent?.release_date
                 ? trendingContent.release_date.split("-")[0]
@@ -84,14 +85,16 @@ const HomeScreen = () => {
               {t("play")}
             </Link>
 
-            {/* more info */}
-            <Link
-              to={`/movie/${trendingContent?.id}`}
-              className="bg-gray/70 hover:bg-gray-500 text-white py-2 px-4 rounded mr-4 flex items-center"
-            >
-              <Info className="size-6  mr-2" />
-              {t("moreinfo")}
-            </Link>
+            {/* Conditionally render "More Info" button for movies only */}
+            {contentType === "movie" && (
+              <Link
+                to={`/movie/${trendingContent?.id}`}
+                className="bg-gray/70 hover:bg-gray-500 text-white py-2 px-4 rounded mr-4 flex items-center"
+              >
+                <Info className="size-6  mr-2" />
+                {t("moreinfo")}
+              </Link>
+            )}
           </div>
         </div>
       </div>

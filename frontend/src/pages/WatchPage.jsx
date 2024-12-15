@@ -98,6 +98,10 @@ const WatchPage = () => {
     }
   }, [subscriptionPlan]);
 
+  const scrollToMovieScreen = () => {
+    movieScreenRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-black p-10">
@@ -135,9 +139,20 @@ const WatchPage = () => {
                 url={`https://www.youtube.com/watch?v=${trailers[currentTrailerIdx]?.key}`}
               />
             </div>
+
+            {/* Watch Now Button */}
+            <div className="text-center mb-8">
+              <button
+                className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-lg shadow-lg"
+                onClick={scrollToMovieScreen}
+              >
+                Watch Now
+              </button>
+            </div>
           </>
         )}
 
+        {/* Movie Details */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-20 max-w-6xl mx-auto">
           <div className="mb-4 md:mb-0">
             <h2 className="text-5xl font-bold">{content?.title || content?.name}</h2>
@@ -156,6 +171,17 @@ const WatchPage = () => {
             alt="Poster"
             className="max-h-[600px] rounded-md"
           />
+        </div>
+
+        {/* Movie Screen */}
+        <div
+          ref={movieScreenRef}
+          className="bg-gray-800 rounded-lg shadow-md p-6 mt-10 max-w-6xl mx-auto"
+        >
+          <h2 className="text-2xl font-bold text-center mb-6">Enjoy Your Movie!</h2>
+          <div className="aspect-video bg-black rounded-lg border-4 border-gray-700 flex items-center justify-center">
+            <p className="text-gray-400 text-lg">Your movie will play here.</p>
+          </div>
         </div>
       </div>
     </div>

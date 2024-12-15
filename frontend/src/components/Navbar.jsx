@@ -9,6 +9,7 @@ const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLearnMoreModalOpen, setIsLearnMoreModalOpen] = useState(false);
   const [activeLink, setActiveLink] = useState(""); // State to track active link
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const { user, logout } = useAuthStore();
   const { setContentType } = useContentStore();
@@ -168,10 +169,74 @@ const Navbar = () => {
           className="size-6 cursor-pointer hover:text-red-500"
           onClick={logout}
         />
-        <div className="sm:hidden">
+        {/* <div className="sm:hidden">
           <Menu className="size-6 cursor-pointer hover:text-red-500" />
+        </div> */}
+        {/* Burger menu icon */}
+        <div className="sm:hidden">
+          <Menu
+            className="size-6 cursor-pointer hover:text-red-500"
+            onClick={() => setIsMenuOpen(!isMenuOpen)} // Toggle menu visibility
+          />
         </div>
       </div>
+
+      {/* Mobile Menu - Toggle visibility based on isMenuOpen */}
+      {isMenuOpen && (
+        <div
+          className={`sm:hidden absolute top-0 right-0 bg-black text-white p-4 h-full flex flex-col items-center gap-6 z-50 transition-transform duration-300 ease-in-out`}
+          style={{
+            width: "50%",
+            transform: isMenuOpen ? "translateX(0)" : "translateX(100%)", // Starts off-screen and moves in
+          }}
+        >
+          <X
+            className="cursor-pointer text-white absolute top-4 right-4"
+            onClick={(e) => {
+              e.stopPropagation(); // Prevents clicks from being intercepted by parent elements
+              setIsMenuOpen(false);
+            }}
+          />
+          <Link
+            to="/"
+            className={`hover:text-red-500 ${
+              activeLink === "movies" ? "text-red-500 font-bold" : "text-white"
+            }`}
+            onClick={() => {
+              setContentType("movie");
+              setActiveLink("movies");
+              setIsMenuOpen(false);
+            }}
+          >
+            {t("Movies")}
+          </Link>
+          <Link
+            to="/"
+            className={`hover:text-red-500 ${
+              activeLink === "tv" ? "text-red-500 font-bold" : "text-white"
+            }`}
+            onClick={() => {
+              setContentType("tv");
+              setActiveLink("tv");
+              setIsMenuOpen(false);
+            }}
+          >
+            {t("TV Shows")}
+          </Link>
+          <Link
+            to="/history"
+            className={`hover:text-red-500 ${
+              activeLink === "history" ? "text-red-500 font-bold" : "text-white"
+            }`}
+            onClick={() => {
+              setActiveLink("history");
+              setIsMenuOpen(false);
+            }}
+          >
+            {t("Search History")}
+          </Link>
+        </div>
+      )}
 
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50">
