@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import LanguageSelector from "../../components/languageSelector";
 
 const AuthScreen = () => {
   const navigate = useNavigate();
@@ -22,12 +23,15 @@ const AuthScreen = () => {
 
       <header className="max-w-6xl mx-auto flex items-center justify-between p-4 pb-10">
         <img src="/logo.png" alt=" logo" className="w-32 sm:w-52 mt-2" />
-        <Link
-          to="/login"
-          className="  text-white bg-red-600 py-1 px-3 mr-[-2 rem] rounded-lg font-semibold text-lg shadow-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-600 transition duration-300 ease-in-out"
-        >
-          {t("Sign In")}
-        </Link>
+        <div className="flex row-span-1 space-x-5">
+          <Link
+            to="/login"
+            className="  text-white bg-red-600 py-1 px-3 mr-[-2 rem] rounded-lg font-semibold text-lg shadow-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-600 transition duration-300 ease-in-out"
+          >
+            {t("Sign In")}
+          </Link>
+          <LanguageSelector className="cursor-pointer" />
+        </div>
       </header>
 
       {/* hero section */}

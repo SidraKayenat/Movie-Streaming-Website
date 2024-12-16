@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuthStore } from "../store/authUser";
 import { useTranslation } from "react-i18next";
+import LanguageSelector from "../components/languageSelector";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -17,8 +18,9 @@ const LoginPage = () => {
     <div className="h-screen w-full hero-bg">
       <header className="max-w-6xl mx-auto flex items-center justify-between p-4">
         <Link to={"/"} className="mt-2">
-          <img src="/logo.png" alt="logo" className="w-52" />
+          <img src="/logo.png" alt="logo" className="w-32 sm:w-52" />
         </Link>
+        <LanguageSelector className="cursor-pointer" />
       </header>
 
       {/* //hold the mail username etc  */}

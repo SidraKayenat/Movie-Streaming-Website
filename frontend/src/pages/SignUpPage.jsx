@@ -108,10 +108,11 @@
 
 // export default SignUpPage;
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuthStore } from "../store/authUser";
 import { useTranslation } from "react-i18next";
+import LanguageSelector from "../components/languageSelector";
 
 const SignUpPage = () => {
   const navigate = useNavigate();
@@ -180,8 +181,9 @@ const SignUpPage = () => {
     <div className="h-screen w-full hero-bg">
       <header className="max-w-6xl mx-auto flex items-center justify-between p-4">
         <Link to="/" className="mt-2">
-          <img src="/logo.png" alt="logo" className="w-52" />
+          <img src="/logo.png" alt="logo" className="w-32 sm:w-52" />
         </Link>
+        <LanguageSelector className="cursor-pointer" />
       </header>
 
       <div className="flex justify-center items-center mt-4 mx-3">

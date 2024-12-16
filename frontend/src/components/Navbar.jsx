@@ -4,6 +4,7 @@ import { useAuthStore } from "../store/authUser";
 import { Search, Menu, LogOut, X, ArrowUpRight, ArrowDown } from "lucide-react";
 import { useContentStore } from "../store/content";
 import { useTranslation } from "react-i18next";
+import LanguageSelector from "./languageSelector";
 
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -156,6 +157,8 @@ const Navbar = () => {
       </div>
 
       <div className="flex gap-5 items-center z-50">
+        {/* Language Selector Added Here */}
+        <LanguageSelector className="cursor-pointer" />
         <Link to="/search">
           <Search className="size-6 cursor-pointer hover:text-red-500" />
         </Link>
@@ -169,6 +172,7 @@ const Navbar = () => {
           className="size-6 cursor-pointer hover:text-red-500"
           onClick={logout}
         />
+
         {/* <div className="sm:hidden">
           <Menu className="size-6 cursor-pointer hover:text-red-500" />
         </div> */}
